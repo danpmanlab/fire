@@ -1,0 +1,47 @@
+demo_eval:
+  data_folder: fire_data
+  exp_folder: fire_experiments
+  gpu_id: 0
+  net_path: http://download.europe.naverlabs.com/ComputerVision/FIRe/official/fire.pth
+evaluation:
+  inference:
+    features_num: 125
+    image_size: null
+    scales:
+    - 2.0
+    - 1.414
+    - 1.0
+    - 0.707
+    - 0.5
+    - 0.353
+    - 0.25
+  local_descriptor:
+    asmk:
+      build_ivf:
+        aggregate: {}
+        ivf:
+          use_idf: false
+        kernel:
+          binary: true
+        quantize:
+          multiple_assignment: 1
+      index:
+        gpu_id: 0
+      query_ivf:
+        aggregate: {}
+        quantize:
+          multiple_assignment: 5
+        search:
+          topk: null
+        similarity:
+          alpha: 3.0
+          similarity_threshold: 0.0
+      train_codebook:
+        codebook:
+          size: 64k
+    codebook_training:
+      images: 20000
+      scales:
+      - 1
+    datasets:
+    - roxford5k
